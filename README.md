@@ -8,10 +8,3 @@ https://www.amazon.com/YHDC-Manufacturer-SCT013-060-Current-Transformer/dp/B0192
 
 - ADS1115, 16Bit, 4 Channel, I2C Interface
 https://www.amazon.com/ADS1115-16-Bit-ADC-Programmable-Amplifier/dp/B00SOY52CU
-
-
-Wiring / Pinout
-
-CT Wire     | ADS Pin     | RaspPI Pin#     | RaspPI Pin Function
-
-            | VDD         | 1               | 3V3
