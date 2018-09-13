@@ -1,9 +1,13 @@
 <B>Project goals:</B>
 <P>
 For this project, I had a couple of simple(ish) goals that I wanted to achieve:
-1)	I wanted to build something cheap that could sample both the total current (amps) flowing into my home, and the current flowing into my hot water system (which is on a circuit control by the local distribution/lines company). 
-2)	Graph this data in ~10 second periods so that I could deduce my (households) load profile, and understand the times when we’re using the most energy, and what out base load is (the parasitic load of our electronics).
-3)	I’m thinking of signing up with an electricity retailer that offers 1-hour period of free power (outside of the morning and evening peaks). With this retailer, I can nominate this 1-hour period on their web portal, and provided I make this nomination before midnight, I can select which hour I want free for that same day. So, my long-term goal is to have the RPi monitor energy consumption over each of the 24 * one-hour periods in a day, work out the most ‘energy intensive’ one-hour period (outside of the peak periods), and then automatically login into this retailer’s web portal at ~23:45 in the evening, and set the free one-hour period on my behalf. 
+  
+- I wanted to build something cheap that could sample both the total current (amps) flowing into my home, and the current flowing into my hot water system (which is on a circuit control by the local distribution/lines company). 
+
+- Graph this data in ~10 second periods so that I could deduce my (households) load profile, and understand the times when we’re using the most energy, and what out base load is (the parasitic load of our electronics).
+
+- I’m thinking of signing up with an electricity retailer that offers 1-hour period of free power (outside of the morning and evening peaks). With this retailer, I can nominate this 1-hour period on their web portal, and provided I make this nomination before midnight, I can select which hour I want free for that same day. So, my long-term goal is to have the RPi monitor energy consumption over each of the 24 * one-hour periods in a day, work out the most ‘energy intensive’ one-hour period (outside of the peak periods), and then automatically login into this retailer’s web portal at ~23:45 in the evening, and set the free one-hour period on my behalf. 
+
 </P>
 This repository contains the code I have written / pillaged to start achieving some of these goals, and as it’s a work in progress, I’ll keep updating things as I go along.
 <P>
@@ -11,6 +15,7 @@ For anyone else thinking of following in my footsteps, it would pay for me to me
 </P>
 <B>The parts list:</B>
 <P>
+  
 -	1* Raspberry Pi 3B+ (from any retailer, they’re all alike)
 
 -	1* 20A/1V CT (To measure hot water load).
