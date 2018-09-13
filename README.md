@@ -9,7 +9,9 @@ For this project, I had a couple of simple(ish) goals that I wanted to achieve:
 - I’m thinking of signing up with an electricity retailer that offers 1-hour period of free power (outside of the morning and evening peaks). With this retailer, I can nominate this 1-hour period on their web portal, and provided I make this nomination before midnight, I can select which hour I want free for that same day. So, my long-term goal is to have the RPi monitor energy consumption over each of the 24 * one-hour periods in a day, work out the most ‘energy intensive’ one-hour period (outside of the peak periods), and then automatically login into this retailer’s web portal at ~23:45 in the evening, and set the free one-hour period on my behalf. 
 
 </P>
+<P>
 This repository contains the code I have written / pillaged to start achieving some of these goals, and as it’s a work in progress, I’ll keep updating things as I go along.
+</P>
 <P>
 For anyone else thinking of following in my footsteps, it would pay for me to mention that I’ve have pretty easy access to the distribution board (in order to install the CTs around the appropriate cable cores), I’m licensed to be legally able to do that, and that the DB was in ear shot my Wi-Fi router. Another way of putting it is…… I had a readily available power supply for my RPi, I could use Wi-Fi to link my RPi to my home LAN, and the DB board was fairly open to accommodate all this extra hardware.
 </P>
