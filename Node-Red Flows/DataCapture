@@ -1,0 +1,851 @@
+[
+    {
+        "id": "d8c111ae.402fd",
+        "type": "tab",
+        "label": "Amp Meter",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b800aae0.58f078",
+        "type": "exec",
+        "z": "d8c111ae.402fd",
+        "command": "/home/pi/NodeRedScripts/AmpMeter",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "8",
+        "oldrc": false,
+        "name": "AmpMeter",
+        "x": 387,
+        "y": 234.5,
+        "wires": [
+            [
+                "3f8dc7b2.9cc3e8",
+                "8075496e.1b9c98"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e16e867b.073028",
+        "type": "inject",
+        "z": "d8c111ae.402fd",
+        "name": "10s Pulse",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 175,
+        "y": 235,
+        "wires": [
+            [
+                "b800aae0.58f078",
+                "f5f5222e.2ec2"
+            ]
+        ]
+    },
+    {
+        "id": "3f8dc7b2.9cc3e8",
+        "type": "csv",
+        "z": "d8c111ae.402fd",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "\"Controlled\", \"Uncontrolled\"",
+        "skip": "0",
+        "x": 589,
+        "y": 222,
+        "wires": [
+            [
+                "b55d34bd.a7fd98"
+            ]
+        ]
+    },
+    {
+        "id": "b55d34bd.a7fd98",
+        "type": "split",
+        "z": "d8c111ae.402fd",
+        "name": "",
+        "splt": ",",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 740,
+        "y": 222,
+        "wires": [
+            [
+                "5e896f98.7fe82"
+            ]
+        ]
+    },
+    {
+        "id": "5e896f98.7fe82",
+        "type": "switch",
+        "z": "d8c111ae.402fd",
+        "name": "",
+        "property": "parts.index",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 878,
+        "y": 222,
+        "wires": [
+            [
+                "17f8cdd6.8f12c2"
+            ],
+            [
+                "8ba77ec2.6696b"
+            ]
+        ]
+    },
+    {
+        "id": "8b5dd48a.2e6de8",
+        "type": "change",
+        "z": "d8c111ae.402fd",
+        "name": "UnCtrld Amps",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Un-controlled Amps",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "label",
+                "pt": "msg",
+                "to": "Un-controlled Amps",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 257,
+        "y": 411,
+        "wires": [
+            [
+                "40e801a7.636b2",
+                "ecc0631c.d7697"
+            ]
+        ]
+    },
+    {
+        "id": "b95ae34a.71419",
+        "type": "change",
+        "z": "d8c111ae.402fd",
+        "name": "Ctrld Amps",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Controlled Amps",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "label",
+                "pt": "msg",
+                "to": "Controlled Amps",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 247,
+        "y": 459,
+        "wires": [
+            [
+                "2a797e09.0b50b2",
+                "ecc0631c.d7697"
+            ]
+        ]
+    },
+    {
+        "id": "ecc0631c.d7697",
+        "type": "ui_chart",
+        "z": "d8c111ae.402fd",
+        "name": "Current Graph",
+        "group": "2d46956e.d559ba",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Current",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#0080c0",
+            "#ff5e5e",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 530,
+        "y": 436,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "40e801a7.636b2",
+        "type": "ui_gauge",
+        "z": "d8c111ae.402fd",
+        "name": "",
+        "group": "3a0812b5.c2b41e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Uncontrolled",
+        "label": "Amps",
+        "format": "{{ value | number: 2}}",
+        "min": 0,
+        "max": "25",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "20",
+        "x": 521,
+        "y": 382,
+        "wires": []
+    },
+    {
+        "id": "2a797e09.0b50b2",
+        "type": "ui_gauge",
+        "z": "d8c111ae.402fd",
+        "name": "",
+        "group": "3a0812b5.c2b41e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Controlled",
+        "label": "Amps",
+        "format": "{{ value | number: 2}}",
+        "min": 0,
+        "max": "25",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "15",
+        "x": 520,
+        "y": 484,
+        "wires": []
+    },
+    {
+        "id": "78fe167d.9a6c08",
+        "type": "comment",
+        "z": "d8c111ae.402fd",
+        "name": "Data Capture",
+        "info": "This code relies on a custom C++ script to read total and hot water current.\nThe C++ script returns these two values as a single comma seperated string (Format: total,hotwater).\n\nThe raw string is written directly to a file on the Raspberry Pi for persistant storage.\n\nThe remainder of the flow is used to split the two values into seperate feeds, \nthen each feed is sent to a dashboard line graph and analogue meter.",
+        "x": 155,
+        "y": 62,
+        "wires": []
+    },
+    {
+        "id": "f5f5222e.2ec2",
+        "type": "function",
+        "z": "d8c111ae.402fd",
+        "name": "Extract TimeStamp",
+        "func": "if ( !msg.timestamp ) msg.timestamp = Math.round(+new Date());\n\nvar dt = new Date(msg.timestamp);\nvar month = dt.getMonth() + 1;\nvar day = dt.getDate();\nvar year = dt.getFullYear();\nvar hour =\tdt.getHours();\nvar mins = dt.getMinutes();\nvar secs = dt.getSeconds();\n\nvar msg1 = {\n\t'month':\tdt.getMonth() + 1,\n\t'day':\t\tdt.getDate(),\n\t'year':\t\tdt.getFullYear(),\n\t'hour':\t    dt.getHours(),\n\t'mins':\t\tdt.getMinutes(),\n\t'secs':\t    dt.getSeconds(),\n\t'payload':  day.toString() \n\t            + \",\"\n\t            + month.toString()\n\t            + \",\"\n\t            + year.toString()\n\t            + \",\"\n\t            + hour.toString()\n\t            + \",\" \n\t            + mins.toString()\n\t            + \",\"\n\t            + secs.toString()\n\t            + \",\"\n}\n\nvar msg2 = {\n\t'hour':\tdt.getHours()\n}\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 413,
+        "y": 76,
+        "wires": [
+            [
+                "bd50cd2d.d913"
+            ],
+            [
+                "ec462c0a.24fe7"
+            ]
+        ]
+    },
+    {
+        "id": "ec462c0a.24fe7",
+        "type": "link out",
+        "z": "d8c111ae.402fd",
+        "name": "S_TimeStamp2",
+        "links": [
+            "74071d87.f153c4",
+            "b7755368.944c4"
+        ],
+        "x": 580,
+        "y": 99,
+        "wires": []
+    },
+    {
+        "id": "74071d87.f153c4",
+        "type": "link in",
+        "z": "d8c111ae.402fd",
+        "name": "R_TimeStamp1",
+        "links": [
+            "ec462c0a.24fe7"
+        ],
+        "x": 100,
+        "y": 606,
+        "wires": [
+            [
+                "eddda8e4.e90f18"
+            ]
+        ]
+    },
+    {
+        "id": "17f8cdd6.8f12c2",
+        "type": "link out",
+        "z": "d8c111ae.402fd",
+        "name": "S_UnCtrldAmps",
+        "links": [
+            "511f925d.35879c",
+            "8ce54ad9.8488c8"
+        ],
+        "x": 1010,
+        "y": 195,
+        "wires": []
+    },
+    {
+        "id": "8ba77ec2.6696b",
+        "type": "link out",
+        "z": "d8c111ae.402fd",
+        "name": "S_CtrldAmps",
+        "links": [
+            "959d69d3.63ba78",
+            "fdc9aa72.03e1e8"
+        ],
+        "x": 1008,
+        "y": 245,
+        "wires": []
+    },
+    {
+        "id": "511f925d.35879c",
+        "type": "link in",
+        "z": "d8c111ae.402fd",
+        "name": "R_UnCtrldAmps1",
+        "links": [
+            "17f8cdd6.8f12c2"
+        ],
+        "x": 100,
+        "y": 412,
+        "wires": [
+            [
+                "8b5dd48a.2e6de8"
+            ]
+        ]
+    },
+    {
+        "id": "959d69d3.63ba78",
+        "type": "link in",
+        "z": "d8c111ae.402fd",
+        "name": "R_CtrldAmps1",
+        "links": [
+            "8ba77ec2.6696b"
+        ],
+        "x": 99,
+        "y": 459,
+        "wires": [
+            [
+                "b95ae34a.71419"
+            ]
+        ]
+    },
+    {
+        "id": "8ce54ad9.8488c8",
+        "type": "link in",
+        "z": "d8c111ae.402fd",
+        "name": "R_UnCtrldAmps2",
+        "links": [
+            "17f8cdd6.8f12c2"
+        ],
+        "x": 100,
+        "y": 648,
+        "wires": [
+            [
+                "e27d97c4.50fe68"
+            ]
+        ]
+    },
+    {
+        "id": "e27d97c4.50fe68",
+        "type": "function",
+        "z": "d8c111ae.402fd",
+        "name": "Calculate Inst. kW",
+        "func": "var amps = msg.payload;\nvar kW = (amps * 230.0) / 1000;\nnewmsg = {'kW' : kW};\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 256,
+        "y": 648,
+        "wires": [
+            [
+                "eddda8e4.e90f18"
+            ]
+        ]
+    },
+    {
+        "id": "a128c000.e28fe",
+        "type": "comment",
+        "z": "d8c111ae.402fd",
+        "name": "Graphing of current",
+        "info": "",
+        "x": 176,
+        "y": 334,
+        "wires": []
+    },
+    {
+        "id": "eddda8e4.e90f18",
+        "type": "join",
+        "z": "d8c111ae.402fd",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "",
+        "propertyType": "full",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 467,
+        "y": 607,
+        "wires": [
+            [
+                "fe0c1454.920c88"
+            ]
+        ]
+    },
+    {
+        "id": "fe0c1454.920c88",
+        "type": "function",
+        "z": "d8c111ae.402fd",
+        "name": "Calculate kWh",
+        "func": "// Get key:value global variable\nvar kWhSums = global.get('UnCtrldkWhSums') || {\n    '0' : 0,\n    '1' : 0,\n    '2' : 0,\n    '3' : 0,\n    '4' : 0,\n    '5' : 0,\n    '6' : 0,\n    '7' : 0,\n    '8' : 0,\n    '9' : 0,\n    '10' : 0,\n    '11' : 0,\n    '12' : 0,\n    '13' : 0,\n    '14' : 0,\n    '15' : 0,\n    '16' : 0,\n    '17' : 0,\n    '18' : 0,\n    '19' : 0,\n    '20' : 0,\n    '21' : 0,\n    '22' : 0,\n    '23' : 0,\n};\n\n// Obtain current hour\nvar hour = parseInt(msg.hour);\n\n// Calculate the multiplication factor to convert\n// kW to kWh based on sample period.\nvar timePeriod = 10;\nvar factor = 1 / (3600 / timePeriod);\n\n// Calculate kWh\nvar kWh = msg.kW * factor;\n\n// Add to key:value store\nkWhSums[hour] += kWh;\n\n// Zero the next 1 hour period in the\n// key:value store, ready for new value\nvar nextHour = hour + 1;\n// If nextHour equals 24, then change to 0.\nif (nextHour == 24)\n{\n    nextHour = 0;\n}\nkWhSums[nextHour] = 0;\n\n// Store new key:value store back into global variable\nglobal.set('UnCtrldkWhSums', kWhSums);\n\nreturn kWhSums;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 677,
+        "y": 607,
+        "wires": [
+            [
+                "5d5dfb69.aac214"
+            ]
+        ]
+    },
+    {
+        "id": "33ebb0f3.eef2e",
+        "type": "ui_chart",
+        "z": "d8c111ae.402fd",
+        "name": "Uncontrolled kWh Graph",
+        "group": "7174b09a.84a7f",
+        "order": 1,
+        "width": "12",
+        "height": "8",
+        "label": "Uncontrolled kWh",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "3",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": true,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 513,
+        "y": 704,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b7755368.944c4",
+        "type": "link in",
+        "z": "d8c111ae.402fd",
+        "name": "R_TimeStamp2",
+        "links": [
+            "ec462c0a.24fe7"
+        ],
+        "x": 102,
+        "y": 831,
+        "wires": [
+            [
+                "f88380d7.b2791"
+            ]
+        ]
+    },
+    {
+        "id": "fdc9aa72.03e1e8",
+        "type": "link in",
+        "z": "d8c111ae.402fd",
+        "name": "R_CtrldAmps2",
+        "links": [
+            "8ba77ec2.6696b"
+        ],
+        "x": 102,
+        "y": 873,
+        "wires": [
+            [
+                "87c9d951.a40ca8"
+            ]
+        ]
+    },
+    {
+        "id": "87c9d951.a40ca8",
+        "type": "function",
+        "z": "d8c111ae.402fd",
+        "name": "Calculate Inst. kW",
+        "func": "var amps = msg.payload;\nvar kW = (amps * 230.0) / 1000;\nnewmsg = {'kW' : kW};\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 258,
+        "y": 873,
+        "wires": [
+            [
+                "f88380d7.b2791"
+            ]
+        ]
+    },
+    {
+        "id": "f88380d7.b2791",
+        "type": "join",
+        "z": "d8c111ae.402fd",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "",
+        "propertyType": "full",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "3",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 469,
+        "y": 832,
+        "wires": [
+            [
+                "6c4ffd06.b5b844"
+            ]
+        ]
+    },
+    {
+        "id": "6c4ffd06.b5b844",
+        "type": "function",
+        "z": "d8c111ae.402fd",
+        "name": "Calculate kWh",
+        "func": "// Get key:value global variable\nvar kWhSums = global.get('CtrldkWhSums') || {\n    '0' : 0,\n    '1' : 0,\n    '2' : 0,\n    '3' : 0,\n    '4' : 0,\n    '5' : 0,\n    '6' : 0,\n    '7' : 0,\n    '8' : 0,\n    '9' : 0,\n    '10' : 0,\n    '11' : 0,\n    '12' : 0,\n    '13' : 0,\n    '14' : 0,\n    '15' : 0,\n    '16' : 0,\n    '17' : 0,\n    '18' : 0,\n    '19' : 0,\n    '20' : 0,\n    '21' : 0,\n    '22' : 0,\n    '23' : 0,\n};\n\n// Obtain current hour\nvar hour = parseInt(msg.hour);\n\n// Calculate the multiplication factor to convert\n// kW to kWh based on sample period.\nvar timePeriod = 10;\nvar factor = 1 / (3600 / timePeriod);\n\n// Calculate kWh\nvar kWh = msg.kW * factor;\n\n// Add to key:value store\nkWhSums[hour] += kWh;\n\n// Zero the next 1 hour period in the\n// key:value store, ready for new value\nvar nextHour = hour + 1;\n// If nextHour equals 24, then change to 0.\nif (nextHour == 24)\n{\n    nextHour = 0;\n}\nkWhSums[nextHour] = 0;\n\n// Store new key:value store back into global variable\nglobal.set('CtrldkWhSums', kWhSums);\n\nreturn kWhSums;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 679,
+        "y": 832,
+        "wires": [
+            [
+                "337995aa.1f2f4a"
+            ]
+        ]
+    },
+    {
+        "id": "2cc2c235.45f30e",
+        "type": "comment",
+        "z": "d8c111ae.402fd",
+        "name": "Calculate Ctrld kWh",
+        "info": "",
+        "x": 177,
+        "y": 778,
+        "wires": []
+    },
+    {
+        "id": "13f5b9c5.7f9446",
+        "type": "comment",
+        "z": "d8c111ae.402fd",
+        "name": "Calculate UnCtrld kWh",
+        "info": "",
+        "x": 185,
+        "y": 556,
+        "wires": []
+    },
+    {
+        "id": "5d5dfb69.aac214",
+        "type": "link out",
+        "z": "d8c111ae.402fd",
+        "name": "S_UnCtrldkWh",
+        "links": [
+            "fd014513.cdca98"
+        ],
+        "x": 848,
+        "y": 607,
+        "wires": []
+    },
+    {
+        "id": "337995aa.1f2f4a",
+        "type": "link out",
+        "z": "d8c111ae.402fd",
+        "name": "S_CtrldkWh",
+        "links": [
+            "9d05e004.9d5f9"
+        ],
+        "x": 849,
+        "y": 833,
+        "wires": []
+    },
+    {
+        "id": "fd014513.cdca98",
+        "type": "link in",
+        "z": "d8c111ae.402fd",
+        "name": "R_UnCtrldkWh",
+        "links": [
+            "5d5dfb69.aac214"
+        ],
+        "x": 98,
+        "y": 706,
+        "wires": [
+            [
+                "d59102e6.c854a"
+            ]
+        ]
+    },
+    {
+        "id": "9d05e004.9d5f9",
+        "type": "link in",
+        "z": "d8c111ae.402fd",
+        "name": "R_CtrldkWh",
+        "links": [
+            "337995aa.1f2f4a"
+        ],
+        "x": 102,
+        "y": 928,
+        "wires": [
+            [
+                "dc56c099.a902c"
+            ]
+        ]
+    },
+    {
+        "id": "d59102e6.c854a",
+        "type": "function",
+        "z": "d8c111ae.402fd",
+        "name": "Split Time Periods",
+        "func": "var outputMsgs = [];\nvar counter = 0;\n\nfor (var i = 0; i < 24; i++)  \n{\n    outputMsgs.push\n    ({\n        payload:    msg[i],\n        topic:      i,\n        label:      i\n    });\n    \n    counter += 1;\n}\n\nreturn [ outputMsgs ];",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 254,
+        "y": 705,
+        "wires": [
+            [
+                "33ebb0f3.eef2e"
+            ]
+        ]
+    },
+    {
+        "id": "a0e0bada.d08888",
+        "type": "ui_chart",
+        "z": "d8c111ae.402fd",
+        "name": "Controlled kWh Graph",
+        "group": "7174b09a.84a7f",
+        "order": 2,
+        "width": "12",
+        "height": "8",
+        "label": "Controlled kWh",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "3",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": true,
+        "colors": [
+            "#ff8000",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 505,
+        "y": 926,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "dc56c099.a902c",
+        "type": "function",
+        "z": "d8c111ae.402fd",
+        "name": "Split Time Periods",
+        "func": "var outputMsgs = [];\nvar counter = 0;\n\nfor (var i = 0; i < 24; i++)  \n{\n    outputMsgs.push\n    ({\n        payload:    msg[i],\n        topic:      i,\n        label:      i\n    });\n    \n    counter += 1;\n}\n\nreturn [ outputMsgs ];",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 256,
+        "y": 927,
+        "wires": [
+            [
+                "a0e0bada.d08888"
+            ]
+        ]
+    },
+    {
+        "id": "bd50cd2d.d913",
+        "type": "link out",
+        "z": "d8c111ae.402fd",
+        "name": "S_TimeStamp1",
+        "links": [
+            "7ed1ab79.1ca454",
+            "d5140463.e13668",
+            "1f8f447.e4a90bc",
+            "d93f10a0.c7a3f"
+        ],
+        "x": 580,
+        "y": 46,
+        "wires": []
+    },
+    {
+        "id": "8075496e.1b9c98",
+        "type": "link out",
+        "z": "d8c111ae.402fd",
+        "name": "S_RawAmps",
+        "links": [
+            "b6c0ea1c.216c48",
+            "99606121.c5517",
+            "593083fd.5258bc"
+        ],
+        "x": 580,
+        "y": 164,
+        "wires": []
+    },
+    {
+        "id": "2d46956e.d559ba",
+        "type": "ui_group",
+        "z": "",
+        "name": "Rolling 24Hr Graphs",
+        "tab": "f796b926.17e6b8",
+        "disp": true,
+        "width": "22",
+        "collapse": true
+    },
+    {
+        "id": "3a0812b5.c2b41e",
+        "type": "ui_group",
+        "z": "",
+        "name": "Guages",
+        "tab": "f796b926.17e6b8",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "7174b09a.84a7f",
+        "type": "ui_group",
+        "z": "",
+        "name": "Rolling 24Hr Graphs",
+        "tab": "f3927016.b5b84",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false
+    },
+    {
+        "id": "f796b926.17e6b8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Power",
+        "icon": "dashboard",
+        "order": 2
+    },
+    {
+        "id": "f3927016.b5b84",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Energy",
+        "icon": "dashboard",
+        "order": 1
+    }
+]
