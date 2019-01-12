@@ -61,5 +61,5 @@ From here, I made it so the C++ code samples the AC current waveform from (each 
 
 In Node-Red, a timer pulse then activates an ‘exec’ node on a reoccurring basis, and the ‘exec’ node executes the compiled C++ binary I created earlier, which spits out two numbers. I then used a couple of other nodes in the same flow to split the two CSV values apart, and add a couple of hard code attributes to them before they are displayed on the graphical UI.
 
-I also take the direct output of the ‘exec’ node, and fire this off to AdaFruit IO’s MQTT cloud service, so that I can access the same data (currents) from their platform, and make use of their graphing tools and dashboard.
+I also take the direct output of the ‘exec’ node, and fire this off to AdaFruit IO’s MQTT cloud service, so that I can access the same data (currents) from their platform, and make use of their graphing tools and dashboard. 10/2018
 </P>
